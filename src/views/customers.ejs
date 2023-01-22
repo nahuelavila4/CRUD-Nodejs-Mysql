@@ -1,0 +1,70 @@
+<!-- Las vistas son el diseño que van a tener los datos que se muestren -->
+<!-- Tip ejs: el = despues del % significa que no solo va a interpretar codigo, sino tambien mostrarlo -->
+
+<%- include("partials/_header") %>
+<h1 class="bg-light">Customers</h1>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-7">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>n°</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (data) { %>
+                    <% for (let x = 0; x < data.lenght; x++) { %>
+                        <tr>
+                            <td><%= x + 1 %></td>
+                            <td><%= data[x].name %></td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+            <form action="/add" method="post">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    class="form-control mb-3"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="phone"
+                    placeholder="Address"
+                    class="form-control mb-3"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Phone"
+                    class="form-control mb-3"
+                  />
+                </div>
+                  <button type="submit" class="btn btn-primary">
+                    Save customer
+                  </button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/_footer") %>
