@@ -8,5 +8,8 @@ const zxc = require("../controllers/customer_controller");
 
 router.get("/", zxc.list);
 router.post("/add", zxc.save);
+router.get("/delete/:id", zxc.delete);
+router.get("/update/:id", zxc.edit);
+router.post("/update/:id", zxc.update);
 
 module.exports = router;

@@ -16,9 +16,7 @@ app.set("port", process.env.Port || 3000);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
 // ----------------------------------------------------------------
-
 
 // Middleware (alterar, convertir datos, etc)
 // Se ejecutan antes de las peticiones de los usuarios
@@ -37,25 +35,19 @@ app.use(
   )
 );
 // urlencode permite entender datos que vengan del form
-app.use(express.urlencoded({extended: false}))
-
+app.use(express.urlencoded({ extended: false }));
 
 // ----------------------------------------------------------------
-
 
 // routes
 app.use("/", customer_routes);
 
-
 // ----------------------------------------------------------------
-
 
 // static files - son archivos para el frontend (html, css, etc)
 app.use(express.static(path.join(__dirname, "public")));
 
-
 // ----------------------------------------------------------------
-
 
 // empezando servidor
 app.listen(app.get("port"), () => {

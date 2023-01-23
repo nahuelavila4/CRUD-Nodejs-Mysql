@@ -19,10 +19,40 @@ controller.list = (req, res) => {
 controller.save = (req, res) => {
   const data = req.body;
   req.getConnection((req, conn) => {
-    conn.query("INSERT INTO customer set ?", [data], (err, customer) => {
-      console.log(customer);
-      res.send("works");
+    conn.query("insert into customer set ?", [data], (err, customer) => {
+      res.redirect("/");
     });
+  });
+};
+
+// se usa params porque lo manda a travez de un parametro de la url
+controller.delete = (req, res) => {
+  const id = req.params.id;
+  req.getConnection((req, conn) => {
+    conn.query("delete from customer where id = ?", [id], (err, customer) => {
+      res.redirect("/");
+    });
+  });
+};
+
+controller.edit = (req, res) => {
+  const id = req.params.id;
+  req.getConnection((err, conn) => {
+    conn.query("select * from customer where id = ?", [id], (err, customer) => {
+      res.render("customer_edit", {
+        data: customer[0],
+      });
+    });
+  });
+};
+
+controller.update = (req, res) => {
+  const id = req.params.id;
+  const customer_update = req.body;
+  req.getConnection((err, conn) => {
+    conn.query("update customer set ? where id = ?", [customer_update, id], (err, customer) => {
+      res.redirect("/")
+    })
   });
 };
 // si no hay error devuelve customers.ejs, NO hace falta poner la extension
